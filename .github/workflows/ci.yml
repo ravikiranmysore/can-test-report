@@ -1,0 +1,32 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - name: Unit tests
+        run: pytest -q
+      - name: Simulate logs
+        run: |
+          cantestreport simulate --dbc dbc/vehicle.dbc --out logs/clean.asc
+          cantestreport simulate --dbc dbc/vehicle.dbc --out logs/faulty.asc \
+            --fault overspeed --fault dropout --fault slow_brake_light
+      - name: Clean log must pass
+        run: cantestreport run --log logs/clean.asc --dbc dbc/vehicle.dbc --rules rules/requirements.yaml --html reports/clean.html --junit reports/clean.xml
+      - name: Faulty log must be caught
+        run: |
+          if cantestreport run --log logs/faulty.asc --dbc dbc/vehicle.dbc --rules rules/requirements.yaml --html reports/faulty.html --junit reports/faulty.xml; then
+            echo "The faulty log should have failed" && exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reports
+          path: reports/
