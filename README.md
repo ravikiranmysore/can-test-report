@@ -41,6 +41,7 @@ cantestreport run --log logs/faulty.asc --dbc dbc/vehicle.dbc --rules rules/requ
 ```
 
 Open `reports/faulty.html` in a browser. Three requirements fail, each with a timestamp.
+![Report for the faulty log](reports/faulty-report.png)
 
 ## Injected faults
 
