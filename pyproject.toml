@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "can-test-report"
+version = "0.1.0"
+description = "Turn CAN logs into requirement-based test reports. Runs on simulated data, no hardware needed."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["python-can>=4.3", "cantools>=39", "pyyaml>=6"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+cantestreport = "cantestreport.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
