@@ -1,0 +1,50 @@
+# Each entry is one requirement that is checked against the CAN log.
+# Types: range, cycle_time, response
+requirements:
+  - id: REQ-ENG-001
+    description: Engine speed shall stay between 0 and 8000 rpm.
+    type: range
+    signal: EngineSpeed
+    min: 0
+    max: 8000
+
+  - id: REQ-ENG-002
+    description: Coolant temperature shall stay between -40 and 110 degC.
+    type: range
+    signal: CoolantTemp
+    min: -40
+    max: 110
+
+  - id: REQ-VEH-001
+    description: Vehicle speed shall stay between 0 and 250 km/h.
+    type: range
+    signal: VehicleSpeed
+    min: 0
+    max: 250
+
+  - id: REQ-COM-001
+    description: EngineData shall be sent every 10 ms (+/- 10 percent).
+    type: cycle_time
+    message: EngineData
+    tolerance_pct: 10
+
+  - id: REQ-COM-002
+    description: VehicleSpeed shall be sent every 20 ms (+/- 10 percent).
+    type: cycle_time
+    message: VehicleSpeed
+    tolerance_pct: 10
+
+  - id: REQ-COM-003
+    description: BrakeStatus shall be sent every 50 ms (+/- 10 percent).
+    type: cycle_time
+    message: BrakeStatus
+    tolerance_pct: 10
+
+  - id: REQ-BRK-001
+    description: The brake light command shall turn on within 100 ms after the brake pedal is pressed.
+    type: response
+    trigger_signal: BrakePedal
+    trigger_value: 1
+    expect_signal: BrakeLightCmd
+    expect_value: 1
+    within_ms: 100

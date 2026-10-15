@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="can-requirements" tests="7" failures="3" errors="0"><testcase classname="faulty.asc" name="REQ-ENG-001 Engine speed shall stay between 0 and 8000 rpm."><failure message="1000 samples, min 900, max 8600, allowed 0 to 8000. 11 out of range.">t = 5.990 s: EngineSpeed = 8600
+t = 6.000 s: EngineSpeed = 8600
+t = 6.010 s: EngineSpeed = 8600
+t = 6.020 s: EngineSpeed = 8600
+t = 6.030 s: EngineSpeed = 8600
+t = 6.040 s: EngineSpeed = 8600
+t = 6.050 s: EngineSpeed = 8600
+t = 6.060 s: EngineSpeed = 8600
+... and 3 more</failure></testcase><testcase classname="faulty.asc" name="REQ-ENG-002 Coolant temperature shall stay between -40 and 110 degC." /><testcase classname="faulty.asc" name="REQ-VEH-001 Vehicle speed shall stay between 0 and 250 km/h." /><testcase classname="faulty.asc" name="REQ-COM-001 EngineData shall be sent every 10 ms (+/- 10 percent)." /><testcase classname="faulty.asc" name="REQ-COM-002 VehicleSpeed shall be sent every 20 ms (+/- 10 percent)."><failure message="489 frames, nominal 20 ms, allowed 18.0 to 22.0 ms, seen min 19.2 ms, max 240.4 ms. 1 gaps out of range.">t = 4.210 s: gap of 240.4 ms</failure></testcase><testcase classname="faulty.asc" name="REQ-COM-003 BrakeStatus shall be sent every 50 ms (+/- 10 percent)." /><testcase classname="faulty.asc" name="REQ-BRK-001 The brake light command shall turn on within 100 ms after the brake pedal is pressed."><failure message="2 trigger event(s), slowest reaction 299 ms, limit 100 ms.">t = 3.039 s: reaction after 251 ms (limit 100 ms)
+t = 6.991 s: reaction after 299 ms (limit 100 ms)</failure></testcase></testsuite>
